@@ -1,6 +1,6 @@
 # Sudoku Solver
 
--  The project is a game that allows the user to solve Sudoku puzzles.
+-  The project is a game that allows the user to solve a Sudoku puzzle.
 -  The aim of the project is to recreate the experience of solving Sudoku puzzles that people used to do in newspapers.
 -  The game consists of a 9x9 grid of boxes that can be filled with digits from 1 to 9.
 -  The game has a reset button, an exit button, a solution button, and a hint button.
