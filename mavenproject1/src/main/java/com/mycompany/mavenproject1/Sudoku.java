@@ -84,7 +84,8 @@ public class Sudoku extends javax.swing.JFrame {
         }
     }
     
-    private void seeSolution(){
+    private void seeSolution()
+    {
         JButton[] preDefinedButtons={
             r1c4,r1c7,r1c8,r1c9,r2c1,r2c5,r2c6,r2c7,r2c9,r3c1,r3c3,r3c5,r3c8,r4c5,r4c6,r4c8,r5c2,r5c3,
             r5c7,r5c8,r6c2,r6c4,r6c5,r7c2,r7c5,r7c7,r7c9,r8c1,r8c4,r8c5,r8c9,r9c1,r9c2,r9c3,r9c6 
@@ -133,8 +134,66 @@ public class Sudoku extends javax.swing.JFrame {
            ResetGame();
         }
     }
-    
-    private void checkMoves(){
+    private void checkMoves() 
+    {
+        JButton[][] btns = {
+            {r1c1, r1c2, r1c3, r1c4, r1c5, r1c6, r1c7, r1c8, r1c9},
+            {r2c1, r2c2, r2c3, r2c4, r2c5, r2c6, r2c7, r2c8, r2c9},
+            {r3c1, r3c2, r3c3, r3c4, r3c5, r3c6, r3c7, r3c8, r3c9},
+            {r4c1, r4c2, r4c3, r4c4, r4c5, r4c6, r4c7, r4c8, r4c9},
+            {r5c1, r5c2, r5c3, r5c4, r5c5, r5c6, r5c7, r5c8, r5c9},
+            {r6c1, r6c2, r6c3, r6c4, r6c5, r6c6, r6c7, r6c8, r6c9},
+            {r7c1, r7c2, r7c3, r7c4, r7c5, r7c6, r7c7, r7c8, r7c9},
+            {r8c1, r8c2, r8c3, r8c4, r8c5, r8c6, r8c7, r8c8, r8c9},
+            {r9c1, r9c2, r9c3, r9c4, r9c5, r9c6, r9c7, r9c8, r9c9}
+        };
+
+        boolean empty=false,ans=true;
+        for (int i = 0; i < 9; i++) 
+        {
+            for (int j = 0; j < 9; j++) 
+            {
+                if (btns[i][j].getText().isEmpty()) 
+                {
+                    empty = true;
+                    break;
+                }
+                if(! btns[i][j].getText().equals(solvedBoard[i][j]))
+                {
+                    ans=false;
+                }
+            }
+            if (empty) 
+            {
+                return;
+            }
+        }
+
+        JFrame frame=new JFrame("Try Again");
+        if(ans)
+        {
+            JOptionPane.showMessageDialog(this, "Congratulations! You've won the game!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            
+            if(JOptionPane.showConfirmDialog(frame,"Do you want to try gain?",
+            "Sudoku Puzzle",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION)
+            {
+                ResetGame();
+                return;
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Game over! You've lost.", "Game Over", JOptionPane.ERROR_MESSAGE);
+            if(JOptionPane.showConfirmDialog(frame,"Do you want to try gain?",
+            "Sudoku Puzzle",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION)
+            {
+                ResetGame();
+                return;
+            }
+        }
+    }
+
+    private void checkMovesHint(){
         JButton[][] btns={
             {r1c1,r1c2,r1c3,r1c4,r1c5,r1c6,r1c7,r1c8,r1c9},
             {r2c1,r2c2,r2c3,r2c4,r2c5,r2c6,r2c7,r2c8,r2c9},
@@ -168,7 +227,7 @@ public class Sudoku extends javax.swing.JFrame {
             }
             else
             {
-                JOptionPane.showMessageDialog(this, "All the fields are empty. Please fill the values to compare", "Message", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please fill in all empty cells to compare with the solution.", "Message", JOptionPane.INFORMATION_MESSAGE);
             }
         }
         else if(!globalFlagHint && globalFlagSolution)
@@ -1576,6 +1635,7 @@ public class Sudoku extends javax.swing.JFrame {
         // TODO add your handling code here:
         r1c1.setText(turn);
         r1c1.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r1c1ActionPerformed
 
     private void r1c4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r1c4ActionPerformed
@@ -1587,30 +1647,35 @@ public class Sudoku extends javax.swing.JFrame {
         // TODO add your handling code here:
         r2c4.setText(turn);
         r2c4.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r2c4ActionPerformed
 
     private void r3c4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r3c4ActionPerformed
         // TODO add your handling code here:
         r3c4.setText(turn);
         r3c4.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r3c4ActionPerformed
 
     private void r4c1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r4c1ActionPerformed
         // TODO add your handling code here:
         r4c1.setText(turn);
         r4c1.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r4c1ActionPerformed
 
     private void r4c4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r4c4ActionPerformed
         // TODO add your handling code here:
         r4c4.setText(turn);
         r4c4.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r4c4ActionPerformed
 
     private void r5c4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r5c4ActionPerformed
         // TODO add your handling code here:
         r5c4.setText(turn);
         r5c4.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r5c4ActionPerformed
 
     private void r6c4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r6c4ActionPerformed
@@ -1623,6 +1688,7 @@ public class Sudoku extends javax.swing.JFrame {
         // TODO add your handling code here:
         r7c4.setText(turn);
         r7c4.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r7c4ActionPerformed
 
     private void r8c4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r8c4ActionPerformed
@@ -1634,12 +1700,14 @@ public class Sudoku extends javax.swing.JFrame {
         // TODO add your handling code here:
         r9c4.setText(turn);
         r9c4.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r9c4ActionPerformed
 
     private void r7c1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r7c1ActionPerformed
         // TODO add your handling code here:
         r7c1.setText(turn);
         r7c1.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r7c1ActionPerformed
 
     private void selectionButtton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectionButtton1ActionPerformed
@@ -1663,222 +1731,259 @@ public class Sudoku extends javax.swing.JFrame {
         // TODO add your handling code here:
         r1c2.setText(turn);
         r1c2.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r1c2ActionPerformed
 
     private void r1c3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r1c3ActionPerformed
         // TODO add your handling code here:
         r1c3.setText(turn);
         r1c3.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r1c3ActionPerformed
 
     private void r1c5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r1c5ActionPerformed
         // TODO add your handling code here:
         r1c5.setText(turn);
         r1c5.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r1c5ActionPerformed
 
     private void r1c6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r1c6ActionPerformed
         // TODO add your handling code here:
         r1c6.setText(turn);
         r1c6.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r1c6ActionPerformed
 
     private void r2c2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r2c2ActionPerformed
         // TODO add your handling code here:
         r2c2.setText(turn);
         r2c2.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r2c2ActionPerformed
 
     private void r2c3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r2c3ActionPerformed
         // TODO add your handling code here:
         r2c3.setText(turn);
         r2c3.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r2c3ActionPerformed
 
     private void r2c8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r2c8ActionPerformed
         // TODO add your handling code here:
         r2c8.setText(turn);
         r2c8.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r2c8ActionPerformed
 
     private void r3c2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r3c2ActionPerformed
         // TODO add your handling code here:
         r3c2.setText(turn);
         r3c2.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r3c2ActionPerformed
 
     private void r3c6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r3c6ActionPerformed
         // TODO add your handling code here:
         r3c6.setText(turn);
         r3c6.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r3c6ActionPerformed
 
     private void r3c7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r3c7ActionPerformed
         // TODO add your handling code here:
         r3c7.setText(turn);
         r3c7.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r3c7ActionPerformed
 
     private void r3c9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r3c9ActionPerformed
         // TODO add your handling code here:
         r3c9.setText(turn);
         r3c9.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r3c9ActionPerformed
 
     private void r4c2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r4c2ActionPerformed
         // TODO add your handling code here:
         r4c2.setText(turn);
         r4c2.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r4c2ActionPerformed
 
     private void r4c3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r4c3ActionPerformed
         // TODO add your handling code here:
         r4c3.setText(turn);
         r4c3.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r4c3ActionPerformed
 
     private void r4c7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r4c7ActionPerformed
         // TODO add your handling code here:
         r4c7.setText(turn);
         r4c7.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r4c7ActionPerformed
 
     private void r4c9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r4c9ActionPerformed
         // TODO add your handling code here:
         r4c9.setText(turn);
         r4c9.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r4c9ActionPerformed
 
     private void r5c1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r5c1ActionPerformed
         // TODO add your handling code here:
         r5c1.setText(turn);
         r5c1.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r5c1ActionPerformed
 
     private void r5c5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r5c5ActionPerformed
         // TODO add your handling code here:
         r5c5.setText(turn);
         r5c5.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r5c5ActionPerformed
 
     private void r5c6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r5c6ActionPerformed
         // TODO add your handling code here:
         r5c6.setText(turn);
         r5c6.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r5c6ActionPerformed
 
     private void r5c9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r5c9ActionPerformed
         // TODO add your handling code here:
         r5c9.setText(turn);
         r5c9.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r5c9ActionPerformed
 
     private void r6c1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r6c1ActionPerformed
         // TODO add your handling code here:
         r6c1.setText(turn);
         r6c1.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r6c1ActionPerformed
 
     private void r6c3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r6c3ActionPerformed
         // TODO add your handling code here:
         r6c3.setText(turn);
         r6c3.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r6c3ActionPerformed
 
     private void r6c6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r6c6ActionPerformed
         // TODO add your handling code here:
         r6c6.setText(turn);
         r6c6.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r6c6ActionPerformed
 
     private void r6c7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r6c7ActionPerformed
         // TODO add your handling code here:
         r6c7.setText(turn);
         r6c7.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r6c7ActionPerformed
 
     private void r6c8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r6c8ActionPerformed
         // TODO add your handling code here:
         r6c8.setText(turn);
         r6c8.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r6c8ActionPerformed
 
     private void r6c9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r6c9ActionPerformed
         // TODO add your handling code here:
         r6c9.setText(turn);
         r6c9.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r6c9ActionPerformed
 
     private void r7c3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r7c3ActionPerformed
         // TODO add your handling code here:
         r7c3.setText(turn);
         r7c3.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r7c3ActionPerformed
 
     private void r7c6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r7c6ActionPerformed
         // TODO add your handling code here:
         r7c6.setText(turn);
         r7c6.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r7c6ActionPerformed
 
     private void r7c8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r7c8ActionPerformed
         // TODO add your handling code here:
         r7c8.setText(turn);
         r7c8.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r7c8ActionPerformed
 
     private void r8c2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r8c2ActionPerformed
         // TODO add your handling code here:
         r8c2.setText(turn);
         r8c2.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r8c2ActionPerformed
 
     private void r8c3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r8c3ActionPerformed
         // TODO add your handling code here:
         r8c3.setText(turn);
         r8c3.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r8c3ActionPerformed
 
     private void r8c6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r8c6ActionPerformed
         // TODO add your handling code here:
         r8c6.setText(turn);
         r8c6.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r8c6ActionPerformed
 
     private void r8c7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r8c7ActionPerformed
         // TODO add your handling code here:
         r8c7.setText(turn);
         r8c7.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r8c7ActionPerformed
 
     private void r8c8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r8c8ActionPerformed
         // TODO add your handling code here:
         r8c8.setText(turn);
         r8c8.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r8c8ActionPerformed
 
     private void r9c5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r9c5ActionPerformed
         // TODO add your handling code here:
         r9c5.setText(turn);
         r9c5.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r9c5ActionPerformed
 
     private void r9c7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r9c7ActionPerformed
         // TODO add your handling code here:
         r9c7.setText(turn);
         r9c7.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r9c7ActionPerformed
 
     private void r9c8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r9c8ActionPerformed
         // TODO add your handling code here:
         r9c8.setText(turn);
         r9c8.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r9c8ActionPerformed
 
     private void r9c9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r9c9ActionPerformed
         // TODO add your handling code here:
         r9c9.setText(turn);
         r9c9.setBackground(Color.WHITE);
+        checkMoves(); // Check if game is over after each move
     }//GEN-LAST:event_r9c9ActionPerformed
 
     private void r1c7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r1c7ActionPerformed
@@ -2120,7 +2225,7 @@ public class Sudoku extends javax.swing.JFrame {
 
     private void hintButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hintButtonActionPerformed
         // TODO add your handling code here:
-        checkMoves();
+        checkMovesHint();
     }//GEN-LAST:event_hintButtonActionPerformed
 
     /**
